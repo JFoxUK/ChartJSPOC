@@ -44,7 +44,6 @@ export default class ChartGenLWC extends LightningElement {
                 
                 this.getChartConfig();
                 this.chart = new window.Chart(ctx, JSON.parse(JSON.stringify(this.chartConfiguration)));
-    
                 this.chartTrack = this.chart;
                 this.chartArea = this.chartTrack.chartArea;
                 
@@ -102,6 +101,7 @@ export default class ChartGenLWC extends LightningElement {
                     }
                 },
                 responsive: true,
+                maintainAspectRatio: false,
                 interaction: {
                     mode: 'index',
                     intersect: false,
