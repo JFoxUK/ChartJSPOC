@@ -1,5 +1,9 @@
 .Maindiv
   {
       background-color: #F9FBFB;
-      height: 100%;
+     height: 400px !important;
+  }
+  .lineChart
+  {
+    height: 400px !important;
   }
