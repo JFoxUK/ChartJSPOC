@@ -2,13 +2,14 @@
  * @description       : 
  * @author            : Jonathan Fox
  * @group             : 
- * @last modified on  : 20-08-2021
+ * @last modified on  : 23-08-2021
  * @last modified by  : Jonathan Fox
 **/
 import { LightningElement, api, track } from 'lwc';
 import chartjs from '@salesforce/resourceUrl/chartjs_v3';
 import { loadScript } from 'lightning/platformResourceLoader';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import hammerjs from '@salesforce/resourceUrl/hammerjs';
 import zoomPlugin from '@salesforce/resourceUrl/chartjs_zoom_plugin';
 
 
@@ -31,7 +32,7 @@ export default class ChartGenLWC extends LightningElement {
     
     connectedCallback(){
         
-        Promise.all([loadScript(this, chartjs), loadScript(this, zoomPlugin)])
+        Promise.all([loadScript(this, chartjs), loadScript(this, hammerjs), loadScript(this, zoomPlugin)])
             .then(() => {
             
                 //this.chartData = result;
@@ -43,14 +44,7 @@ export default class ChartGenLWC extends LightningElement {
                 
                 this.getChartConfig();
                 this.chart = new window.Chart(ctx, JSON.parse(JSON.stringify(this.chartConfiguration)));
-                
-                // ******* Need to register plugins ??HOW IN LWC?
-                //Chart.register(zoomPlugin);
-                //Chart.pluginService.register(zoomPlugin);
-                //this.chart.register(zoomPlugin);
-                //this.chart.pluginService.register(zoomPlugin);
-
-
+    
                 this.chartTrack = this.chart;
                 this.chartArea = this.chartTrack.chartArea;
                 
@@ -121,14 +115,14 @@ export default class ChartGenLWC extends LightningElement {
                     zoom: {
                         zoom: {
                           wheel: {
-                            enabled: true,
+                            enabled: true,                           
                           },
                           pinch: {
                             enabled: true
                           },
                           mode: 'xy',
                         }
-                    }
+                      }
                 },
                 tooltips: {
                     mode: 'index',
